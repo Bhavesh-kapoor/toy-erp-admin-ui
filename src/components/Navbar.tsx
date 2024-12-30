@@ -1,61 +1,61 @@
 "use client";
 
-import { tabs } from "@/data/tabs";
-import { FaUser } from "react-icons/fa";
+import { IoSearch } from "react-icons/io5";
+import { debounce } from "@/hooks/general";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { IoLogOutSharp } from "react-icons/io5";
+import DarkLightToggle from "./DarkLightToggle";
 import { useAuth } from "../context/AuthContext";
-import { bigShoulders } from "@/font/font";
+import FullScreenButton from "./FullScreenButton";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import { IoIosNotifications } from "react-icons/io";
 
 const Navbar: React.FC = () => {
-  const pathname = usePathname();
-  const { user, token, logout } = useAuth();
+  const { token } = useAuth();
   const [stateReady, setStateReady] = useState(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     setStateReady(true);
   }, []);
 
+  const fetchFilteredData = () => {
+    // Implement your search logic here
+  };
+
   return (
     <>
       {stateReady && token && (
-        <nav className={`bg-primary fixed w-[83%] ml-[17%] z-50 px-4 py-3 text-white ${bigShoulders.className}`}>
+        <nav
+          className={`fixed bg-whiteBg w-[83%] ml-[17%] z-50 px-4 py-2 text-black`}
+        >
           <div className="flex justify-between items-center">
-            {tabs.map((tab) => {
-              let isPageTitleExist: any = [];
-              if (tab?.tabs)
-                isPageTitleExist = tab?.tabs.filter(
-                  (item: any) => item?.href === pathname
-                );
-              return (
-                <div
-                  key={tab?.id}
-                  className={`${
-                    pathname !== tab?.href &&
-                    isPageTitleExist?.length === 0 &&
-                    "hidden"
-                  } text-3xl font-medium`}
+            <div className="flex w-1/3 justify-start items-center gap-5">
+              <HiOutlineMenuAlt1
+                size={25}
+                className="text-iconBlack font-black"
+              />
+              <div className="flex w-full items-center">
+                <input
+                  type="text"
+                  value={searchTerm ?? ""}
+                  placeholder="Search for Results..."
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="border-y border-l bg-infobg border-primary px-4 placeholder:text-gray-500 text-sm py-2.5 rounded-l-full outline-none text-gray-500 w-full"
+                />
+                <button
+                  type="button"
+                  className="border-y border-r bg-infobg border-primary text-gray-400 rounded-r-full py-[11px] pr-4 text-lg"
+                  onClick={debounce(() => fetchFilteredData(), 500)}
                 >
-                  {isPageTitleExist && isPageTitleExist.length > 0
-                    ? isPageTitleExist[0]?.pageTitle
-                    : tab?.pageTitle}
-                </div>
-              );
-            })}
-            <p className="inline-flex gap-2 items-center">
-              <span className="flex gap-2 items-center text-lg font-medium">
-                <FaUser />
-                {user?.email}
-              </span>
-              <span
-                onClick={logout}
-                title="Logout"
-                className="py-2 px-1 rounded-lg hover:bg-primary hover:text-white cursor-pointer transition-all duration-100 ease-in-out"
-              >
-                <IoLogOutSharp size={30} />
-              </span>
-            </p>
+                  <IoSearch />
+                </button>
+              </div>
+            </div>
+            <div className="flex w-1/3 text-iconBlack justify-end items-center gap-2">
+              <DarkLightToggle />
+              <IoIosNotifications className="text-2xl" />
+              <FullScreenButton />
+            </div>
           </div>
         </nav>
       )}

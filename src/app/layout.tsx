@@ -21,8 +21,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 
 export const metadata: Metadata = {
-  title: "Makaan | Admin Panel",
-  description: "To control the content of the admin panel.",
+  title: "INQERP | Ledger",
+  description: "The ledger is connected to the blockchain.",
 };
 
 export default function RootLayout({
@@ -38,7 +38,7 @@ export default function RootLayout({
         <AuthProvider>
           <div className="flex">
             <Sidebar />
-            <div className="flex-1">
+            <div className="flex-1 border-l border-secondary">
               <Navbar />
               <main>{children}</main>
               <div id="modal-root"></div>

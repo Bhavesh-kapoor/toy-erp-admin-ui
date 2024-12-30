@@ -1,13 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { tabs } from "@/data/tabs";
 import React, { useState } from "react";
-import { bigShoulders } from "@/font/font";
+import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { usePathname } from "next/navigation";
 
 const Sidebar: React.FC = () => {
   const pathname = usePathname();
@@ -20,25 +19,24 @@ const Sidebar: React.FC = () => {
     userPermissions.includes(tab.permission)
   );
 
-  console.log(pathname);
-
   return (
     <div
-      className={`fixed w-[17%] text-white bg-primary h-full overflow-y-scroll no-scrollbar ${bigShoulders.className}`}
+      className={`fixed w-[17%] text-white bg-primary h-full overflow-y-scroll no-scrollbar`}
     >
-      <div className="flex justify-center bg-primary w-[17%] items-center py-3 fixed top-0">
+      <div className="flex justify-center border-b border-b-secondary bg-primary w-[17%] items-center py-[11px] fixed top-0">
         <Link href={"/dashboard"}>
-          <Image
+          {/* <Image
             priority
             width={150}
             height={50}
             alt="Unfazed_Logo"
             unoptimized
-            src={"/assets/logo/logo@2x.png"}
-          />
+            src={"/assets/logo/logo.jpg"}
+          /> */}
+          <h1 className="text-3xl">MASKEEN</h1>
         </Link>
       </div>
-      <nav className="flex flex-col justify-center items-center mt-[72px]">
+      <nav className="flex flex-col gap-2 justify-center items-center mt-[72px]">
         {filteredTabs.map((tab) => {
           const Icon = tab.icon;
           return (
@@ -50,12 +48,13 @@ const Sidebar: React.FC = () => {
                   if (tab?.tabs && tab?.tabs.length > 0)
                     showList({ tab: tab?.permission, list: tab?.tabs });
                 }}
-                className={`w-full px-4 py-2 md:text-base lg:text-lg flex justify-between gap-2 items-center border-b hover:border-white border-primary transition hover:text-white ${
-                  pathname === tab?.href && "border-white"
+                className={`w-full py-3 pl-5 text-sm cursor-pointer hover:bg-secondary transition rounded-r-full md:text-base text-info flex justify-between gap-2 items-center border-primary hover:text-white ${
+                  pathname === tab?.href &&
+                  "bg-secondary rounded-r-full text-white font-semibold"
                 }`}
               >
-                <span className="flex gap-2 items-center">
-                  <Icon /> {tab?.label}
+                <span className="flex gap-5 items-center">
+                  <Icon size={18} /> {tab?.label}
                 </span>
                 {tab?.tabs && tab?.tabs.length > 0 && (
                   <RiArrowDropDownLine size={20} className="w-fit" />

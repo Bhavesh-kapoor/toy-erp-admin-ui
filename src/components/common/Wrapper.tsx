@@ -1,15 +1,26 @@
 "use client";
+
+import Link from "next/link";
+
 const Wrapper = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="p-5 bg-primary/20 pt-[88px] ml-[17%]">
-      <div className="p-4 bg-white rounded-xl min-h-[75vh]">{children}</div>
-      <div className="flex justify-between text-primary font-semibold items-center pt-5">
-        © 2024. All Rights Reserved
-      </div>
+    <div className="bg-infobg pt-[70px] ml-[17%]">
+      <div className="p-4 min-h-screen">{children}</div>
+      <p className="flex text-sm p-5 gap-1 text-gray-500 bg-whiteBg justify-center items-center">
+        Copywrite © {new Date().getFullYear()}
+        <strong className="text-blue-500"> Maskeen</strong>. Designed with ❤️ by
+        <strong className="underline text-blue-500">
+          <Link href={"https://www.volvrit.com"} target="_blank">
+            {" "}
+            Volvrit
+          </Link>
+        </strong>
+        . All Rights Reserved
+      </p>
     </div>
   );
 };

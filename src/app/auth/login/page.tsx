@@ -20,7 +20,7 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const response: any = await Post(
-      "/public/admin/login",
+      "/api/public/admin/login",
       {
         identifier: email,
         password: password,
@@ -59,7 +59,7 @@ const Login: React.FC = () => {
             <div className="w-full lg:w-1/2 order-2 lg:order-1 lg:pl-20">
               <div className="px-5 mb-5">
                 <Image
-                  src={"/assets/logo/logo@2x.png"}
+                  src={"/assets/logo/logo.jpg"}
                   alt="logo"
                   width={240}
                   height={160}

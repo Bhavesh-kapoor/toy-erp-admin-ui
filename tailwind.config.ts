@@ -15,8 +15,14 @@ const config: Config = {
       },
       animation: { wave: "wave 1.5s linear infinite" },
       colors: {
-        primary: "#6F1241",
-        secondary: "#469BAF",
+        whiteBg: "var(--white-bg)",
+        iconBlack: "var(--black-icon)",
+        infobg: "var(--light-white-bg)",
+        info: "var(--light-white-color)", // Use the custom CSS variable for info color
+        primary: "var(--primary-color)", // Use the custom CSS variable for primary color
+        secondary: "var(--secondary-color)", // Use the custom CSS variable for secondary color
+        foreground: "var(--foreground)", // Use the custom CSS variable for foreground color
+        background: "var(--background)", // Use the custom CSS variable for background color
       },
       keyframes: {
         wave: {
@@ -28,4 +34,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
