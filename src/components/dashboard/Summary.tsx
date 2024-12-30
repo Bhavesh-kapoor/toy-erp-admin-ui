@@ -2,9 +2,11 @@ import {
   closedDeals,
   recentActivity,
   upcomingMeetings,
-  websiteTraffic,
 } from "@/data/dashboard";
 import { Deal } from "@/hooks/types";
+import BarChart from "../chart/Barchart";
+import { FaFileAlt } from "react-icons/fa";
+import { FaEye, FaArrowDown } from "react-icons/fa";
 
 const Summary = () => {
   const recentDeals: Deal[] = [
@@ -52,133 +54,176 @@ const Summary = () => {
   return (
     <>
       {" "}
-      <div className="flex flex-col lg:flex-row gap-4">
+      <div className="flex flex-col lg:flex-row gap-5">
         {/* Closed Deals */}
-        <div className="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold text-gray-700">Closed Deals</h2>
-          <div className="mt-4 space-y-4">
+        <div className="w-full lg:w-1/4 h-fit bg-white p-4 rounded-xl">
+          <div className="flex justify-between gap-5 border-b pb-4 items-center">
+            <h2 className="font-semibold">Closed Deals</h2>
+            <button className="text-blue-500 bg-blue-100 font-semibold text-sm rounded-md whitespace-nowrap px-2 py-1">
+              View all
+            </button>
+          </div>
+          <div className="mt-4 space-y-5">
             {closedDeals.map((deal) => (
               <div key={deal.id} className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <div className={`h-6 w-6 rounded-full ${deal.color}`}></div>
-                  <span className="font-medium">{deal.name}</span>
+                <div className="flex items-center space-x-2 w-full">
+                  <div
+                    className={`min-h-10 min-w-10 p-2 text-white aspect-square flex justify-center items-center rounded-full ${deal.color}`}
+                  >
+                    {deal.name.slice(0, 2).toUpperCase()}
+                  </div>
+                  <span className="text-sm font-bold w-full items-center">
+                    <span className="text-black font-medium inline-flex">
+                      {deal.name} -{" "}
+                      <span className="font-bold">{deal.amount}</span>
+                    </span>
+                    <span className="flex justify-between pt-1 font-normal items-center">
+                      <span className="text-xs text-gray-500">
+                        {deal?.date}
+                      </span>
+                      <span className="text-white bg-gray-400 px-2 text-xs py-0.5 rounded">
+                        {deal?.status}
+                      </span>
+                    </span>
+                  </span>
                 </div>
-                <div className="text-gray-500">{deal.amount}</div>
               </div>
             ))}
           </div>
-          <button className="text-purple-600 mt-4">View All</button>
         </div>
 
         {/* Website Traffic */}
-        <div className="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold text-gray-700">
-            Website Traffic
-          </h2>
-          <div className="mt-4">
-            <div className="flex justify-between">
-              <div className="text-purple-500">
-                Total Visits: {websiteTraffic.totalVisits}
-              </div>
-              <div className="text-blue-500">
-                Unique Visitors: {websiteTraffic.uniqueVisitors}
-              </div>
-              <div className="text-orange-500">
-                Bounce Rate: {websiteTraffic.bounceRate}
-              </div>
-            </div>
+        <div className="w-full h-fit lg:w-1/4 bg-white p-4 rounded-xl">
+          <div className="flex justify-between gap-5 border-b pb-3 items-center">
+            <h2 className="font-semibold">Website Traffic</h2>
+            <button className="text-blue-500 bg-blue-100 font-semibold text-sm rounded-md whitespace-nowrap px-2 py-1">
+              View Details
+            </button>
           </div>
-          <button className="text-purple-600 mt-4">View Details</button>
+          <BarChart />{" "}
         </div>
 
         {/* Recent Activity */}
-        <div className="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold text-gray-700">
-            Recent Activity
-          </h2>
+        <div className="w-full h-fit lg:w-1/4 bg-white p-4 rounded-xl">
+          <div className="flex justify-between gap-3 border-b pb-3 items-center">
+            <h2 className="font-semibold">Recent Activity</h2>
+            <button className="text-blue-500 bg-blue-100 font-semibold text-sm rounded-md whitespace-nowrap px-2 py-1">
+              View Details
+            </button>
+          </div>
           <div className="mt-4 space-y-4">
             {recentActivity.map((activity) => (
-              <div key={activity.id} className="flex items-center space-x-4">
-                <div className={`h-8 w-8 rounded-full ${activity.icon}`}></div>
+              <div key={activity.id} className="flex items-start space-x-4">
+                <div
+                  className={`min-h-9 min-w-9 flex justify-center items-center text-lg aspect-square rounded-full ${activity.icon}`}
+                >
+                  <FaFileAlt color="white" />
+                </div>
                 <div className="flex flex-col">
-                  <span className="font-medium">{activity.title}</span>
-                  <span className="text-gray-500 text-sm">
+                  <span className="font-semibold text-sm">
+                    {activity.title}
+                  </span>
+                  <span className="text-gray-500 text-xs">
                     {activity.description}
                   </span>
-                  {activity.user && (
-                    <span className="text-gray-400 text-sm">
-                      - {activity.user}
+                  <span className="text-right flex flex-col">
+                    {activity.user && (
+                      <span className="text-gray-500 text-xs">
+                        - {activity.user}
+                      </span>
+                    )}
+                    <span className="text-gray-500 text-xs">
+                      {activity.time}
                     </span>
-                  )}
-                  <span className="text-gray-400 text-xs">{activity.time}</span>
+                  </span>
                 </div>
               </div>
             ))}
           </div>
-          <button className="text-purple-600 mt-4">View Details</button>
         </div>
 
         {/* Upcoming Meetings */}
-        <div className="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold text-gray-700">
-            Upcoming Meetings
-          </h2>
+        <div className="w-full h-fit lg:w-1/4 bg-white p-4 rounded-xl">
+          <div className="flex justify-between gap-5 border-b pb-3 items-center">
+            <h2 className="font-semibold">Upcoming Meetings</h2>
+            <button className="text-blue-500 bg-blue-100 font-semibold text-sm rounded-md whitespace-nowrap px-2 py-1">
+              View all
+            </button>
+          </div>
           <div className="mt-4 space-y-4">
             {upcomingMeetings.map((meeting, index) => (
               <div key={index} className="flex justify-between">
-                <div>
-                  <div className="font-medium">{meeting.date}</div>
-                  <div className="text-gray-500">{meeting.title}</div>
+                <div className="flex justify-between w-full items-center gap-3">
+                  <div className="font-medium w-12 aspect-square flex justify-center items-center bg-gray-100 text-gray-500 text-center text-xs p-2 rounded-lg">
+                    {meeting.date.slice(0, 8)}
+                  </div>
+                  <div className="text-black text-sm font-semibold">
+                    <p>{meeting.title}</p>
+                    <p className="font-normal text-gray-600">
+                      {meeting.description}
+                    </p>
+                  </div>
+                  <div className="text-gray-500 text-sm">{meeting.time}</div>
                 </div>
-                <div className="text-gray-400">{meeting.time}</div>
               </div>
             ))}
           </div>
-          <button className="text-purple-600 mt-4">View All</button>
         </div>
       </div>
       {/* Recent Deals */}
-      <section className="px-6 py-4 bg-white shadow-md rounded-lg">
-        <h2 className="text-xl font-semibold">Recent Deals Status</h2>
-        <table className="w-full mt-4 text-sm text-gray-700">
-          <thead className="text-xs text-gray-500 uppercase bg-gray-100">
+      <section className="px-6 py-4 bg-white rounded-xl mt-5">
+        <div className="flex justify-between items-center">
+          <h2 className="text-lg font-semibold">Recent Deals Status</h2>
+          <button className="text-blue-500 bg-blue-100 font-semibold text-sm rounded-md whitespace-nowrap px-2 py-1">
+            View Details
+          </button>
+        </div>
+        <table className="w-full mt-4 text-sm">
+          <thead className="text-base text-black text-left">
             <tr>
-              <th className="px-4 py-2">Deal ID</th>
-              <th className="px-4 py-2">Client</th>
-              <th className="px-4 py-2">Deal Value</th>
-              <th className="px-4 py-2">Deal Status</th>
-              <th className="px-4 py-2">Closing Date</th>
-              <th className="px-4 py-2">Salesperson</th>
-              <th className="px-4 py-2">Actions</th>
+              <th className="p-4 border border-gray-200">Deal ID</th>
+              <th className="p-4 border border-gray-200">Client</th>
+              <th className="p-4 border border-gray-200">Deal Value</th>
+              <th className="p-4 border border-gray-200">Deal Status</th>
+              <th className="p-4 border border-gray-200">Closing Date</th>
+              <th className="p-4 border border-gray-200">Salesperson</th>
+              <th className="p-4 border border-gray-200">Actions</th>
             </tr>
           </thead>
           <tbody>
             {recentDeals.map((deal) => (
-              <tr key={deal.id} className="border-b">
-                <td className="px-4 py-2">{deal.id}</td>
-                <td className="px-4 py-2">{deal.client}</td>
-                <td className="px-4 py-2">{deal.dealValue}</td>
-                <td className="px-4 py-2">
+              <tr
+                key={deal.id}
+                className="border-b hover:bg-gray-100 cursor-pointer"
+              >
+                <td className="p-4 border border-gray-200">{deal.id}</td>
+                <td className="p-4 border border-gray-200">{deal.client}</td>
+                <td className="p-4 border border-gray-200">{deal.dealValue}</td>
+                <td className="p-4 border border-gray-200">
                   <span
-                    className={`px-2 py-1 rounded-full ${
+                    className={`px-2 py-1 text-xs text-white rounded ${
                       deal.dealStatus === "Closed"
-                        ? "bg-green-200 text-green-800"
+                        ? "bg-green-400"
                         : deal.dealStatus === "In Progress"
-                        ? "bg-yellow-200 text-yellow-800"
-                        : "bg-red-200 text-red-800"
+                        ? "bg-yellow-400"
+                        : "bg-red-400"
                     }`}
                   >
                     {deal.dealStatus}
                   </span>
                 </td>
-                <td className="px-4 py-2">{deal.closingDate}</td>
-                <td className="px-4 py-2">{deal.salesperson}</td>
-                <td className="px-4 py-2">
-                  <button className="text-indigo-600 hover:text-indigo-800 mr-2">
-                    👁
+                <td className="p-4 border border-gray-200">
+                  {deal.closingDate}
+                </td>
+                <td className="p-4 border border-gray-200">
+                  {deal.salesperson}
+                </td>
+                <td className="p-4 border border-gray-200">
+                  <button className="bg-blue-400 text-white rounded text-lg p-1 hover:text-indigo-800 mr-2">
+                    <FaEye />
                   </button>
-                  <button className="text-green-600 hover:text-green-800">
-                    ⬇️
+                  <button className="bg-gray-400 text-white rounded text-lg p-1 hover:text-green-800">
+                    <FaArrowDown />
                   </button>
                 </td>
               </tr>

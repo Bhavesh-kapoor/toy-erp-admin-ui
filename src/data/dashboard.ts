@@ -5,7 +5,7 @@ export const closedDeals = [
     amount: "$50,000",
     date: "12th Oct, 2024",
     status: "Closed",
-    color: "bg-purple-600",
+    color: "bg-blue-500",
   },
   {
     id: 2,
@@ -21,15 +21,15 @@ export const closedDeals = [
     amount: "$120,000",
     date: "25th Oct, 2024",
     status: "Closed",
-    color: "bg-blue-600",
+    color: "bg-red-500",
   },
   {
     id: 4,
-    name: "Digital Innovations",
+    name: "Digital",
     amount: "$120,000",
     date: "20th Oct, 2024",
     status: "Closed",
-    color: "bg-teal-400",
+    color: "bg-blue-500",
   },
   {
     id: 5,
@@ -37,7 +37,7 @@ export const closedDeals = [
     amount: "$65,000",
     date: "19th Oct, 2024",
     status: "Closed",
-    color: "bg-yellow-500",
+    color: "bg-green-500",
   },
   {
     id: 6,
@@ -45,7 +45,7 @@ export const closedDeals = [
     amount: "$65,000",
     date: "30th Oct, 2024",
     status: "Closed",
-    color: "bg-pink-500",
+    color: "bg-orange-500",
   },
 ];
 
@@ -62,7 +62,7 @@ export const recentActivity = [
     description: "A new customer has signed up for an account.",
     user: "John Doe",
     time: "10 mins ago",
-    icon: "bg-indigo-500",
+    icon: "bg-orange-500",
   },
   {
     id: 2,
@@ -70,7 +70,7 @@ export const recentActivity = [
     description: "An invoice has been generated for a recent order.",
     user: "",
     time: "30 mins ago",
-    icon: "bg-orange-400",
+    icon: "bg-blue-400",
   },
   {
     id: 3,
@@ -94,7 +94,7 @@ export const recentActivity = [
     description: "Task has been successfully completed.",
     user: "Sarah Lee",
     time: "3 hours ago",
-    icon: "bg-pink-500",
+    icon: "bg-blue-500",
   },
 ];
 
