@@ -1,9 +1,9 @@
 "use client";
 
+import Home from "@/components/dashboard/Home";
 import Wrapper from "@/components/common/Wrapper";
 import AuthGuard from "../../components/AuthGuard";
 import Summary from "@/components/dashboard/Summary";
-import Home from "@/components/dashboard/Home";
 
 const Dashboard: React.FC = () => {
   return (
