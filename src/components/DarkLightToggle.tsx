@@ -23,7 +23,7 @@ const DarkLightToggle = () => {
       {isDarkMode ? (
         <IoSunny className="text-2xl" />
       ) : (
-        <IoMoon className="text-xl" />
+        <IoMoon className="text-2xl" />
       )}
     </button>
   );
