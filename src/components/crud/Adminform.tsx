@@ -37,11 +37,9 @@ const UserForm: React.FC<DealerFormProps> = (props: any) => {
     "Admin",
     "Blogs",
     "ContactUs",
-    "Dealer",
-    "Property Listing",
+    "Lead",
     "Reviews",
     "SEO",
-    "subscription",
     "Transaction",
   ];
   const handleChange = (

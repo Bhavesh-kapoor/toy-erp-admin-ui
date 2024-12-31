@@ -1,3 +1,4 @@
+import { SiGoogleadmob } from "react-icons/si";
 import { RiSeoFill, RiAdminFill } from "react-icons/ri";
 import { FaBlog, FaHome, FaQuestionCircle } from "react-icons/fa";
 
@@ -11,6 +12,14 @@ export const tabs = [
     href: "/dashboard",
     pageTitle: "Overview",
     permission: "Dashboard", // Add a permission attribute
+  },
+  {
+    id: 6,
+    icon: SiGoogleadmob,
+    label: "Manage Leads",
+    href: "/dashboard/leads",
+    pageTitle: "All Leads",
+    permission: "Admin",
   },
   {
     id: 5,
