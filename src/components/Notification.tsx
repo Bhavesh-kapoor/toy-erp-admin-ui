@@ -12,7 +12,7 @@ const Notification = () => {
         <div className="p-4 bg-gray-50 flex border-b justify-between items-center">
           <span className="font-bold">Notifications</span>
           <span className="px-4 py-1 rounded text-white bg-green-500 whitespace-nowrap text-xs">
-            5 Unread
+            2 Unread
           </span>
         </div>
         <div className="bg-white p-4 space-y-2">

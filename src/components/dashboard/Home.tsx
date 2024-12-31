@@ -38,7 +38,7 @@ const Home: FC = () => {
       {/* CRM Stats */}
       <section className="">
         <h2 className="text-xl font-bold text-iconBlack">CRM Dashboard</h2>
-        <div className="grid grid-cols-2 gap-4 mt-6 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-5 mt-6 md:grid-cols-4">
           <div className="p-4 flex gap-2 bg-white rounded-lg">
             <div className="w-[55%]">
               <p className="text-lg inline-flex items-center text-gray-500 font-bold">
