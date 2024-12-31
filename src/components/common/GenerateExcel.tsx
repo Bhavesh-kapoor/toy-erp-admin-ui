@@ -29,7 +29,7 @@ const GenerateExcelButton = ({ data }: { data: any }) => {
     <div className="flex">
       <button
         onClick={handleGenerateExcel}
-        className="bg-primary px-4 rounded-xl text-lg text-white"
+        className="bg-primary px-4 rounded-xl text-white"
       >
         Download CSV
       </button>

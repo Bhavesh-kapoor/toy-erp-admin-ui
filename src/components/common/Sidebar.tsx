@@ -48,7 +48,7 @@ const Sidebar: React.FC = () => {
                   if (tab?.tabs && tab?.tabs.length > 0)
                     showList({ tab: tab?.permission, list: tab?.tabs });
                 }}
-                className={`w-full py-3 pl-5 text-sm cursor-pointer hover:bg-secondary transition rounded-r-full md:text-base text-info flex justify-between gap-2 items-center border-primary hover:text-white ${
+                className={`py-3 pl-5 mr-auto w-[90%] text-sm cursor-pointer hover:bg-secondary transition rounded-r-full md:text-base text-info flex justify-between gap-2 items-center border-primary hover:text-white ${
                   pathname === tab?.href &&
                   "bg-secondary rounded-r-full text-white font-semibold"
                 }`}

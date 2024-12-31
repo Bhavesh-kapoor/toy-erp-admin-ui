@@ -5,8 +5,8 @@ import Modal from "./Modal";
 import FormRenderer from "./FormRender";
 import NoDataFound from "./NoDataFound";
 import { FaFilter } from "react-icons/fa";
-import { bigShoulders } from "@/font/font";
 import { endpoints } from "@/data/endpoints";
+import { BsFilterLeft } from "react-icons/bs";
 import { Delete, Fetch } from "@/hooks/apiUtils";
 import GenerateExcelButton from "./GenerateExcel";
 import React, { useState, useEffect } from "react";
@@ -133,11 +133,6 @@ const TableComponent = <T extends { [key: string]: any }>({
         } else window.location.reload(); // TODO: handle this more gracefully in the future
       }
     }
-  };
-
-  const handleTherapistByRevenue = () => {
-    setIsModalVisible(true);
-    setFormConfig("TherapistByRevenue");
   };
 
   const debounce = (func: any, delay: number) => {
@@ -267,27 +262,16 @@ const TableComponent = <T extends { [key: string]: any }>({
           closeModal={() => setOfferModal(false)}
         />
       </Modal>
-      <div className="flex justify-between items-center">
-        <h2
-          className={`text-3xl font-extrabold text-black w-fit ${bigShoulders.className}`}
-        >
+      <div className="flex bg-white p-5 rounded-2xl justify-between items-center">
+        <h2 className={`text-3xl text-black font-semibold w-fit`}>
           All {type}
         </h2>
         <div className="space-x-2 flex">
           <GenerateExcelButton data={filteredData} />
-          {type === "Therapist" && (
-            <button
-              type="button"
-              onClick={handleTherapistByRevenue}
-              className="bg-white text-black border flex gap-2 justify-center items-center border-primary/40 hover:border-primary outline-none px-4 text-lg py-2 rounded-xl hover:bg-primary hover:text-white"
-            >
-              By Revenue
-            </button>
-          )}
           <button
             type="button"
             onClick={debounce(handleReset, 1000)}
-            className="bg-white text-black border flex gap-2 justify-center items-center border-primary/40 outline-none px-4 text-lg py-2 hover:border-primary rounded-xl hover:bg-primary hover:text-white"
+            className="bg-white text-black border flex gap-2 justify-center items-center border-gray-200 outline-none px-4 text-lg py-2 hover:border-primary rounded-xl hover:bg-primary hover:text-white"
           >
             Clear filters <FaFilter />
           </button>
@@ -303,24 +287,29 @@ const TableComponent = <T extends { [key: string]: any }>({
           )}
         </div>
       </div>
-      <div className="py-3">
+      <div className="py-5">
         {/* Search and Filters */}
-        <div className="flex gap-5 justify-between items-end mb-4">
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={searchTerm}
-              placeholder="Search here..."
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="border px-4 text-lg py-2 placeholder:text-black rounded-xl outline-none focus:ring-2 focus:ring-primary/50 text-black border-primary/40 w-full"
-            />
-            <button
-              type="button"
-              className="border px-4 text-lg py-2 rounded-xl text-black border-primary/40 hover:bg-primary hover:text-white"
-              onClick={debounce(() => fetchFilteredData(), 500)}
-            >
-              Search
-            </button>
+        <div className="flex gap-5 bg-white p-5 rounded-2xl justify-between items-end mb-4">
+          <div>
+            <p className="flex text-black font-medium gap-2 items-center pb-1">
+              <BsFilterLeft size={25} /> Filters
+            </p>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={searchTerm}
+                placeholder="Search here..."
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="border px-4 text-lg py-2 placeholder:text-black rounded-xl outline-none focus:ring-2 focus:ring-primary/50 text-black border-gray-200 w-full"
+              />
+              <button
+                type="button"
+                className="border px-4 text-lg py-2 rounded-xl text-black border-gray-200 bg-white hover:bg-primary hover:text-white"
+                onClick={debounce(() => fetchFilteredData(), 500)}
+              >
+                Search
+              </button>
+            </div>
           </div>
           {!hideStatus && (
             <div className="flex flex-col gap-1">
@@ -328,7 +317,7 @@ const TableComponent = <T extends { [key: string]: any }>({
               <select
                 value={activeStatus}
                 onChange={(e) => handleActiveStatus(e.target.value as any)}
-                className="border px-4 text-lg py-2 rounded-xl outline-none focus:ring-2 focus:ring-primary/50 text-black border-primary/40"
+                className="border px-4 text-lg py-2 rounded-xl outline-none focus:ring-2 focus:ring-primary/50 text-black border-gray-200"
               >
                 <option value="all">All</option>
                 <option value="active">Active</option>
@@ -343,7 +332,7 @@ const TableComponent = <T extends { [key: string]: any }>({
               onChange={(e: any) =>
                 fetchFilteredData({ limit: e.target.value })
               }
-              className="border px-4 text-lg py-2 rounded-xl outline-none focus:ring-2 focus:ring-primary/50 text-black border-primary/40"
+              className="border px-4 text-lg py-2 rounded-xl outline-none focus:ring-2 focus:ring-primary/50 text-black border-gray-200"
             >
               {[5, 10, 20, 50, 100].map((items) => (
                 <option key={items} value={items}>
@@ -363,7 +352,7 @@ const TableComponent = <T extends { [key: string]: any }>({
                   if (endDate) fetchFilteredData({ start: e.target.value });
                 }}
                 max={endDate as any}
-                className="border px-4 text-lg py-2 rounded-xl outline-none focus:ring-2 focus:ring-primary/50 text-black border-primary/40"
+                className="border px-4 text-lg py-2 rounded-xl outline-none focus:ring-2 focus:ring-primary/50 text-black border-gray-200"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -376,22 +365,22 @@ const TableComponent = <T extends { [key: string]: any }>({
                   if (startDate) fetchFilteredData({ end: e.target.value });
                 }}
                 min={startDate as any}
-                className="border px-4 text-lg py-2 rounded-xl outline-none focus:ring-2 focus:ring-primary/50 text-black border-primary/40"
+                className="border px-4 text-lg py-2 rounded-xl outline-none focus:ring-2 focus:ring-primary/50 text-black border-gray-200"
               />
             </div>
           </div>
         </div>
 
         {/* Table */}
-        <div className="overflow-x-auto">
-          <table className="min-w-full rounded-t-xl overflow-hidden bg-white">
+        <div className="overflow-x-auto bg-white p-5 rounded-2xl">
+          <table className="min-w-full max-w-auto overflow-hidden">
             <thead>
               <tr>
                 {columns.map((col) => (
                   <th
                     key={col.key}
                     style={{ maxWidth: `calc(100% /${columns.length + 1} )` }}
-                    className="py-3 text-white font-medium px-4 border-b border-primary bg-primary text-left cursor-pointer"
+                    className="p-4 text-gray-700 font-bold border border-gray-200 text-left cursor-pointer"
                     onClick={() => col.sortable && handleSort(col.key)}
                   >
                     {col.label}
@@ -410,7 +399,7 @@ const TableComponent = <T extends { [key: string]: any }>({
                   </th>
                 ))}
                 {operationsAllowed?.read && (
-                  <th className="py-3 px-4 border-b text-left text-white font-medium border-primary bg-primary">
+                  <th className="p-4 border text-left text-black border-gray-200 font-bold">
                     Actions
                   </th>
                 )}
@@ -420,9 +409,15 @@ const TableComponent = <T extends { [key: string]: any }>({
               {filteredData &&
                 filteredData.length > 0 &&
                 filteredData.map((row: any, index: any) => (
-                  <tr key={index} className="border-b border-primary/40/20">
+                  <tr
+                    key={index}
+                    className="border text-black border-gray-200 cursor-pointer"
+                  >
                     {columns.map((col) => (
-                      <td key={col.key} className="text-sm py-2 px-4">
+                      <td
+                        key={col.key}
+                        className="text-sm border border-gray-200 px-4 py-3"
+                      >
                         {col.isDate
                           ? dayjs(row[col.key]).format("YYYY-MM-DD")
                           : col.key === "_id" || col.key === "conversationId"
@@ -439,21 +434,21 @@ const TableComponent = <T extends { [key: string]: any }>({
                       </td>
                     ))}
                     {operationsAllowed?.read && (
-                      <td className="py-2 px-4 text-nowrap flex justify-start items-center">
+                      <td className="px-4 py-3 text-nowrap flex h-full justify-center items-center">
                         {operationsAllowed?.update && (
                           <button
                             onClick={() => handleEdit(row?._id)}
-                            className="text-green-600 mr-1 hover:bg-green-200 p-1 rounded-xl transition"
+                            className="text-blue-500 text-xl hover:scale-125 hover:p-1 mr-1 hover:bg-blue-100 p-1 rounded transition"
                           >
-                            <FaEdit size={18} title="Edit" />
+                            <FaEdit title="Edit" />
                           </button>
                         )}
                         {operationsAllowed?.delete && (
                           <button
                             onClick={() => handleDelete(row?._id)}
-                            className="text-red-700 hover:bg-red-200 p-1 rounded-xl transition"
+                            className="text-red-700 text-xl hover:scale-125 hover:p-1 hover:bg-red-100 p-1 rounded transition"
                           >
-                            <FaTrash size={18} title="Delete" />
+                            <FaTrash title="Delete" />
                           </button>
                         )}
                       </td>
@@ -471,11 +466,11 @@ const TableComponent = <T extends { [key: string]: any }>({
               100
             )}
             disabled={paginate.currentPage === 1}
-            className="border border-primary/40 text-black rounded-md px-4 py-1 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+            className="border border-primary text-black rounded-md px-4 py-1 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
           >
             Previous
           </button>
-          <span className="font-semibold text-primary">
+          <span className="font-semibold text-gray-700">
             Showing {(paginate.currentPage - 1) * paginate.itemsPerPage + 1} to{" "}
             {paginate.totalItems < paginate.itemsPerPage * paginate.currentPage
               ? paginate.totalItems
@@ -488,7 +483,7 @@ const TableComponent = <T extends { [key: string]: any }>({
               100
             )}
             disabled={paginate.currentPage === paginate.totalPages}
-            className="border border-primary/40 hover:bg-primary hover:text-white text-black rounded-md px-4 py-1 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+            className="border border-primary hover:bg-primary hover:text-white text-black rounded-md px-4 py-1 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
           >
             Next
           </button>

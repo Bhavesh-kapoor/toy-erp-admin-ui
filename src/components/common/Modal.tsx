@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = ({
   return ReactDOM.createPortal(
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="fixed inset-0 bg-white backdrop-blur-lg bg-opacity-10"></div>
-      <div className="bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg w-4/5 z-10 relative">
+      <div className="bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg w-4/5 rounded-xl z-10 relative">
         <div className="bg-white overflow-scroll no-scrollbar max-h-[90vh] rounded-xl">
           <p className="w-full flex justify-between items-center p-4 pb-0">
             <span className="text-2xl text-primary uppercase font-bold font-serif">
